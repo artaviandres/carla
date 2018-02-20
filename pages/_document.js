@@ -16,7 +16,7 @@ export default class MyDocument extends Document {
 					<link
 						rel="shortcut icon"
 						type="image/png"
-						href="/static/images/favicon.png"
+						href="/static/favicon.ico"
 					/>
 				</Head>
 				<body>
@@ -27,7 +27,7 @@ export default class MyDocument extends Document {
 				<style jsx global>{`
 					body {
                         margin: 0;
-                        background-color: ${theme.colors.green_bg};
+                        background-color: ${theme.colors.white};
 					}
 				`}</style>
 			</html>
