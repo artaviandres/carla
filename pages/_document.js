@@ -27,7 +27,8 @@ export default class MyDocument extends Document {
 				<style jsx global>{`
 					body {
                         margin: 0;
-                        background-color: ${theme.colors.white};
+						background-color: ${theme.colors.white};
+						overflow: hidden;
 					}
 				`}</style>
 			</html>

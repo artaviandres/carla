@@ -1,10 +1,10 @@
 import React from 'react';
-import firebase from 'firebase';
-import Footer from '../components/Footer';
+import firebase from 'firebase'
 import Menu from '../components/Menu';
-import Home from '../components/Home';
+import Add from '../components/Add';
+import Footer from '../components/Footer';
 
-class Index extends React.Component {
+class AddHistory extends React.Component {
     constructor(props) {
         super(props);
         var config = {
@@ -19,26 +19,25 @@ class Index extends React.Component {
             firebase.initializeApp(config);
         }
     }
-
     render() {
-        return(
+        return (
             <div>
                 <div className="container">
                     <Menu />
-                    <Home db={firebase} />
+                    <Add db={firebase} />
                 </div>
                 <Footer />
-                <style jsx>{`
-                    .container {
-                        width: 70vw;
-                        border: 1px solid #000;
-                        height: 100vh;
-                        margin: 0 auto;
-                    }
-                `}</style>
+            <style jsx>{`
+                .container {
+                    width: 70vw;
+                    border: 1px solid #000;
+                    height: 100vh;
+                    margin: 0 auto;
+                }
+            `}</style>
             </div>
         );
     }
 }
 
-export default Index;
+export default AddHistory;

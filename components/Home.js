@@ -1,9 +1,38 @@
 import React from 'react';
-import Historial from '../static/historial.json';
+import _ from 'lodash';
 import theme from '../style/variables';
 import typographies from '../style/typographies';
 
 class Home extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+          messages: []
+        };
+    }
+
+    componentDidMount() {
+        let app = this.props.db.database().ref('messages');
+        app.on('value', snapshot => {
+          this.getData(snapshot.val());
+        });
+    }
+      
+    getData(values){
+        let messagesVal = values;
+        let messages = _(messagesVal)
+            .keys()
+            .map(messageKey => {
+                let cloned = _.clone(messagesVal[messageKey]);
+                cloned.key = messageKey;
+                return cloned;
+            })
+            .value();
+        this.setState({
+            messages: messages
+        });
+    }
+
     render() {
         let counter = 0
         return (
@@ -12,16 +41,17 @@ class Home extends React.Component {
                     <thead className="header">
                         <tr>
                             <th>Fecha</th>
-                            <th>Lugar de inyección</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {Historial.map(key => {
-                            counter = counter + 1;
-                            return <tr key={counter}>
-                                <th>{key.date}</th>
-                                <th>{key.location}</th>
-                            </tr>
+                        {this.state.messages.map((key) => {
+                            return (
+                                <tr key={key.key}>
+                                    <th>
+                                        {key.message}
+                                    </th>
+                                </tr>
+                            )
                         })}
                     </tbody>
                 </table>
