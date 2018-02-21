@@ -9,16 +9,12 @@ class Home extends React.Component {
         this.state = {
           messages: []
         };
-    }
-
-    componentDidMount() {
-        let app = this.props.db.database().ref('messages');
+        let app = this.props.db.database().ref('entries');
         app.on('value', snapshot => {
           this.getData(snapshot.val());
         });
-    }
-      
-    getData(values){
+      }
+      getData(values){
         let messagesVal = values;
         let messages = _(messagesVal)
             .keys()
@@ -31,8 +27,7 @@ class Home extends React.Component {
         this.setState({
             messages: messages
         });
-    }
-
+      }
     render() {
         let counter = 0
         return (
@@ -44,15 +39,15 @@ class Home extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.messages.map((key) => {
-                            return (
-                                <tr key={key.key}>
-                                    <th>
-                                        {key.message}
-                                    </th>
-                                </tr>
-                            )
-                        })}
+                            {this.state.messages.map((key) => {
+                                return (
+                                    <tr key={key.key}>
+                                        <th>
+                                            {key.date}
+                                        </th>
+                                    </tr>
+                                )
+                            })}
                     </tbody>
                 </table>
                 <style jsx>{`
