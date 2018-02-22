@@ -21,6 +21,7 @@ class Menu extends React.Component {
                     .container {
                         width: 100vw;
                         height: 50px;
+                        margin: 50px 0 100px 0;
                     }
                     .anchor_tags {
                         line-height: 50px;

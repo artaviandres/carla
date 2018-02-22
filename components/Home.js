@@ -6,57 +6,47 @@ import typographies from '../style/typographies';
 class Home extends React.Component {
     constructor(props){
         super(props);
-        this.state = {
-          messages: []
-        };
-        let app = this.props.db.database().ref('entries');
-        app.on('value', snapshot => {
-          this.getData(snapshot.val());
-        });
       }
-      getData(values){
-        let messagesVal = values;
-        let messages = _(messagesVal)
-            .keys()
-            .map(messageKey => {
-                let cloned = _.clone(messagesVal[messageKey]);
-                cloned.key = messageKey;
-                return cloned;
-            })
-            .value();
-        this.setState({
-            messages: messages
-        });
-      }
+
     render() {
         let counter = 0
         return (
             <div>
-                <table>
-                    <thead className="header">
-                        <tr>
-                            <th>Fecha</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                            {this.state.messages.map((key) => {
-                                return (
-                                    <tr key={key.key}>
-                                        <th>
-                                            {key.date}
-                                        </th>
-                                    </tr>
-                                )
+                <div className="table__container">
+                    <table>
+                        <thead className="header">
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Lugar de inyección</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.props.entries.map((key) => {
+                                counter = counter + 1;
+                                return <tr key={counter}>
+                                    <th>
+                                        {key.date}
+                                    </th>
+                                    <th>
+                                        {key.location}
+                                    </th>
+                                </tr>
                             })}
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
                 <style jsx>{`
                     ${typographies};
+                    .table__container {
+                        max-height: 400px;
+                        overflow-y: scroll;
+                    }
                     table {
                         width: 70%;
                         border: 1px solid #000;
                         border-spacing: 0;
                         margin: 0 auto;
+                        height: 100%;
                     }
 
                     th {
